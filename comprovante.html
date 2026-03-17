@@ -1,0 +1,115 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comprovante de Retirada</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Calibri,Arial,sans-serif;background:#f0f0f8;display:flex;justify-content:center;padding:30px 16px}
+.card{background:#fff;width:100%;max-width:480px;border-radius:12px;overflow:hidden;border:1px solid #ddd}
+.header{background:#3B35C4;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+.header-logo{font-family:Arial Black,sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:3px}
+.header-sub{font-size:10px;color:#C8C3FF;letter-spacing:1px;margin-top:2px}
+.header-divider{width:1px;height:44px;background:rgba(255,255,255,.3);margin:0 16px}
+.header-right{text-align:left}
+.header-lg{font-family:Arial Black,sans-serif;font-size:12px;font-weight:900;color:#fff;letter-spacing:1px}
+.header-rev{font-family:Arial Black,sans-serif;font-size:12px;font-weight:700;color:#A99FF4;letter-spacing:1px}
+.title-bar{background:#2D28A0;padding:10px 24px;display:flex;align-items:center;justify-content:space-between}
+.title-bar h2{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px}
+.title-bar span{font-size:12px;color:#C8C3FF}
+.body{padding:20px 24px}
+.section{margin-bottom:18px}
+.section-title{font-size:10px;font-weight:700;color:#3B35C4;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid #EEEDFE;padding-bottom:4px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;margin-bottom:7px;font-size:13px}
+.label{color:#888;flex:0 0 42%}
+.value{color:#222;font-weight:500;flex:0 0 56%;text-align:right;word-break:break-word}
+.equip-row{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#EEEDFE;border-radius:8px;margin-bottom:6px;font-size:13px}
+.equip-dot{width:8px;height:8px;border-radius:50%;background:#3B35C4;flex-shrink:0}
+.equip-serial{color:#3C3489;font-weight:500}
+.assinatura{border:1.5px dashed #C8C3FF;border-radius:8px;height:64px;display:flex;align-items:center;justify-content:center;margin-top:8px}
+.assinatura span{font-size:12px;color:#A99FF4}
+.footer{background:#F7F7FD;border-top:1px solid #EEEDFE;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.footer-text{font-size:11px;color:#888}
+.btn-print{background:#3B35C4;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer}
+.footer-privacy{font-size:10px;color:#8a8a8a;line-height:1.3}
+@media print{body{background:#fff;padding:0}.btn-print{display:none}.footer-privacy{font-size:9px;color:#666}}
+</style>
+<script>
+/* Lê parâmetros do FRAGMENTO (#hash), não do ?query, para não enviar PII ao servidor */
+function getHashParam(name){
+  const raw = location.hash.startsWith('#') ? location.hash.slice(1) : location.hash;
+  const params = new URLSearchParams(raw);
+  // compat: aceita espaços codificados como %20 vindos do Excel
+  return (params.get(name) || "").replace(/%20/g, " ");
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const os  = getHashParam("os")  || "—";
+  const nm  = getHashParam("nm")  || "—";
+  const end = getHashParam("end") || "—";
+  const cid = getHashParam("cid") || "—";
+  const eq  = getHashParam("eq")  || "Não informado";
+
+  document.getElementById("os").textContent  = os;
+  document.getElementById("nm").textContent  = nm;
+  document.getElementById("end").textContent = end;
+  document.getElementById("cid").textContent = cid;
+  document.getElementById("eq").textContent  = eq;
+  document.getElementById("data").textContent = new Date().toLocaleDateString("pt-BR");
+});
+</script>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <div class="header-logo">ALARES</div>
+        <div class="header-sub">Logística Reversa</div>
+      </div>
+      <div class="header-divider"></div>
+      <div class="header-right">
+        <div class="header-lg">LOGÍSTICA</div>
+        <div class="header-rev">REVERSA</div>
+      </div>
+    </div>
+
+    <div class="title-bar">
+      <h2>Comprovante de Retirada</h2>
+      <span>OS #<span id="os">—</span></span>
+    </div>
+
+    <div class="body">
+      <div class="section">
+        <div class="section-title">Dados do cliente</div>
+        <div class="row"><span class="label">Nome</span><span id="nm" class="value">—</span></div>
+        <div class="row"><span class="label">Endereço</span><span id="end" class="value">—</span></div>
+        <div class="row"><span class="label">Cidade</span><span id="cid" class="value">—</span></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Equipamento retirado</div>
+        <div class="equip-row">
+          <div class="equip-dot"></div>
+          <div class="equip-serial">Serial: <span id="eq">Não informado</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Assinatura do cliente</div>
+        <div class="assinatura"><span>Assinar aqui</span></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">Emitido em: <span id="data"></span></div>
+      <button class="btn-print" onclick="window.print()">Imprimir / PDF</button>
+      <div class="footer-privacy">
+        Aviso de privacidade: esta página não coleta dados de visitantes.
+        O provedor de hospedagem pode registrar endereços IP por motivos de segurança.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
