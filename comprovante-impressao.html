@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Protocolo de Coleta — 2 vias (Impressão)</title>
+<style>
+  :root{ --azul:#2D28A0; --roxo:#3B35C4; --cinza:#666; --bordo:#DDD; --bg:#F7F7FD; }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:Calibri, Arial, sans-serif;color:#111}
+  header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--roxo);color:#fff}
+  header .brand{font-weight:900;letter-spacing:2px}
+  header .sub{font-size:11px;color:#C8C3FF}
+  .wrap{padding:10px}
+  .via{background:#fff;border:1px solid var(--bordo);border-radius:10px;margin:6px 0;padding:12px}
+  .title{display:flex;justify-content:space-between;align-items:center;background:var(--azul);color:#fff;padding:8px 12px;border-radius:6px;font-weight:700}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .row{display:flex;gap:8px;align-items:flex-end;margin-top:8px}
+  .label{font-size:12px;color:var(--cinza);min-width:160px}
+  .value{flex:1;min-height:20px;border-bottom:1px dashed var(--bordo);padding-bottom:2px;font-weight:600}
+  .checkline{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+  .chk{display:flex;align-items:center;gap:6px;font-size:13px}
+  .box{width:13px;height:13px;border:1px solid #222;display:inline-block;vertical-align:middle;background:#fff}
+  .box.on{background:#111}
+  .signs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  .sig{min-height:46px;border:1.5px dashed #C8C3FF;border-radius:8px;display:flex;align-items:flex-end;justify-content:space-between;padding:6px}
+  .sig small{color:#8a86d9}
+  .cut{margin:10px 0;border-bottom:2px dashed #bbb}
+  .footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:#444;font-size:12px}
+  .contacts{font-size:11px;color:#444}
+  .btns{position:sticky;bottom:0;background:#ffffffc0;padding:8px;display:flex;gap:8px;border-top:1px solid #eee}
+  .btn{background:var(--roxo);color:#fff;border:none;padding:8px 12px;border-radius:6px;font-weight:700;cursor:pointer}
+  @media print{ .btns{display:none} @page{size:A4;margin:12mm} body{background:#fff} }
+</style>
+<script>
+  function get(name){ const h = location.hash.startsWith('#') ? location.hash.slice(1) : location.hash; const p = new URLSearchParams(h); return (p.get(name) || '').replace(/\+/g,' '); }
+  function onFlag(name){ const v = (get(name)+'').toLowerCase(); return v==='1' || v==='true' || v==='sim' || v==='ok' || v==='x'; }
+  function setTxt(id, val){ document.querySelectorAll('#'+id).forEach(el=>{ el.textContent = val || ''; }); }
+  function apply(){
+    setTxt('os', get('os'));
+    setTxt('ct', get('ct'));
+    setTxt('nm', get('nm'));
+    setTxt('end', get('end'));
+    setTxt('comp', get('comp'));
+    setTxt('eq', get('eq'));
+    setTxt('mac', get('mac'));
+    setTxt('mot', get('mot'));
+    setTxt('cpf', get('cpf'));
+
+    ['fon','ctrl','hdmi'].forEach(k=>{ document.querySelectorAll('.box.'+k).forEach(b=> b.classList.toggle('on', onFlag(k)) ) });
+    const dan = onFlag('dan');
+    document.querySelectorAll('.box.dan-sim').forEach(b=> b.classList.toggle('on', dan));
+    document.querySelectorAll('.box.dan-nao').forEach(b=> b.classList.toggle('on', !dan));
+
+    const now = new Date();
+    const dh = now.toLocaleDateString('pt-BR')+ ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+    document.querySelectorAll('#emissao').forEach(e=> e.textContent = dh);
+  }
+  window.addEventListener('DOMContentLoaded', apply);
+</script>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="brand">ALARES</div>
+      <div class="sub">Logística Reversa</div>
+    </div>
+    <div class="contacts">
+      <div><strong>Fone:</strong> 10600 • <strong>WhatsApp:</strong> 2080-0600</div>
+      <div><strong>E-mail:</strong> atendimento@alaresinternet.com.br • <strong>Site:</strong> www.alaresinternet.com.br</div>
+    </div>
+  </header>
+  <div class="wrap">
+
+    <!-- VIA DO TERCEIRIZADO -->
+    <section class="via">
+      <div class="title">PROTOCOLO DE COLETA — VIA DO TERCEIRIZADO <span style="font-weight:400;font-size:12px">Emissão: <span id="emissao"></span></span></div>
+      <div class="grid">
+        <div class="row"><div class="label">Ordem de Serviço:</div><div class="value" id="os"></div></div>
+        <div class="row"><div class="label">Contrato/Assinante:</div><div class="value" id="ct"></div></div>
+        <div class="row"><div class="label">Nome do Assinante:</div><div class="value" id="nm"></div></div>
+        <div class="row"><div class="label">Endereço:</div><div class="value" id="end"></div></div>
+        <div class="row"><div class="label">Complemento:</div><div class="value" id="comp"></div></div>
+      </div>
+      <div class="row" style="margin-top:12px"><strong>ITENS DEVOLVIDOS</strong></div>
+      <div class="grid">
+        <div class="row"><div class="label">Equipamento:</div><div class="value" id="eq"></div></div>
+        <div class="row"><div class="label">Nº MAC / Série:</div><div class="value" id="mac"></div></div>
+      </div>
+      <div class="checkline">
+        <div class="chk"><span class="box fon"></span> Fonte</div>
+        <div class="chk"><span class="box ctrl"></span> Controle</div>
+        <div class="chk"><span class="box hdmi"></span> Cabo HDMI</div>
+        <div class="chk">Equipamento danificado? <span class="box dan-sim"></span> Sim  <span class="box dan-nao"></span> Não</div>
+      </div>
+      <div class="signs">
+        <div class="sig"><small>DATA ______/______/______  HORA ______:______</small><small>MOTOQUEIRO: <span id="mot"></span></small></div>
+        <div class="sig"><small>ASSINANTE</small><small>CPF: <span id="cpf"></span></small></div>
+      </div>
+    </section>
+
+    <div class="cut"></div>
+
+    <!-- VIA DO ASSINANTE -->
+    <section class="via">
+      <div class="title">PROTOCOLO DE COLETA — VIA DO ASSINANTE <span style="font-weight:400;font-size:12px">Emissão: <span id="emissao"></span></span></div>
+      <div class="grid">
+        <div class="row"><div class="label">Ordem de Serviço:</div><div class="value" id="os"></div></div>
+        <div class="row"><div class="label">Contrato/Assinante:</div><div class="value" id="ct"></div></div>
+        <div class="row"><div class="label">Nome do Assinante:</div><div class="value" id="nm"></div></div>
+        <div class="row"><div class="label">Endereço:</div><div class="value" id="end"></div></div>
+        <div class="row"><div class="label">Complemento:</div><div class="value" id="comp"></div></div>
+      </div>
+      <div class="row" style="margin-top:12px"><strong>ITENS DEVOLVIDOS</strong></div>
+      <div class="grid">
+        <div class="row"><div class="label">Equipamento:</div><div class="value" id="eq"></div></div>
+        <div class="row"><div class="label">Nº MAC / Série:</div><div class="value" id="mac"></div></div>
+      </div>
+      <div class="checkline">
+        <div class="chk"><span class="box fon"></span> Fonte</div>
+        <div class="chk"><span class="box ctrl"></span> Controle</div>
+        <div class="chk"><span class="box hdmi"></span> Cabo HDMI</div>
+        <div class="chk">Equipamento danificado? <span class="box dan-sim"></span> Sim  <span class="box dan-nao"></span> Não</div>
+      </div>
+      <div class="signs">
+        <div class="sig"><small>DATA ______/______/______  HORA ______:______</small><small>MOTOQUEIRO: <span id="mot"></span></small></div>
+        <div class="sig"><small>ASSINANTE</small><small>CPF: <span id="cpf"></span></small></div>
+      </div>
+      <div class="footer">
+        <div><strong>ALARES INTERNET</strong></div>
+        <div class="contacts">Fone: 10600 • WhatsApp: 2080-0600 • atendimento@alaresinternet.com.br • www.alaresinternet.com.br</div>
+      </div>
+    </section>
+  </div>
+  <div class="btns">
+    <button class="btn" onclick="window.print()">Imprimir / PDF</button>
+  </div>
+</body>
+</html>
