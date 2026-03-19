@@ -11,6 +11,9 @@
   header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--roxo);color:#fff}
   header .brand{font-weight:900;letter-spacing:2px}
   header .sub{font-size:11px;color:#C8C3FF}
+  header .contacts{font-size:11px;color:#fff}
+  header .contacts strong{color:#fff}
+  header .contacts a{color:#fff;text-decoration:none}
   .wrap{padding:10px}
   .via{background:#fff;border:1px solid var(--bordo);border-radius:10px;margin:6px 0;padding:12px}
   .title{display:flex;justify-content:space-between;align-items:center;background:var(--azul);color:#fff;padding:8px 12px;border-radius:6px;font-weight:700}
@@ -51,10 +54,6 @@
     const dan = onFlag('dan');
     document.querySelectorAll('.box.dan-sim').forEach(b=> b.classList.toggle('on', dan));
     document.querySelectorAll('.box.dan-nao').forEach(b=> b.classList.toggle('on', !dan));
-
-    const now = new Date();
-    const dh = now.toLocaleDateString('pt-BR')+ ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-    document.querySelectorAll('#emissao').forEach(e=> e.textContent = dh);
   }
   window.addEventListener('DOMContentLoaded', apply);
 </script>
@@ -74,7 +73,7 @@
 
     <!-- VIA DO TERCEIRIZADO -->
     <section class="via">
-      <div class="title">PROTOCOLO DE COLETA — VIA DO TERCEIRIZADO <span style="font-weight:400;font-size:12px">Emissão: <span id="emissao"></span></span></div>
+      <div class="title">PROTOCOLO DE COLETA — VIA DO TERCEIRIZADO</div>
       <div class="grid">
         <div class="row"><div class="label">Ordem de Serviço:</div><div class="value" id="os"></div></div>
         <div class="row"><div class="label">Contrato/Assinante:</div><div class="value" id="ct"></div></div>
@@ -103,7 +102,7 @@
 
     <!-- VIA DO ASSINANTE -->
     <section class="via">
-      <div class="title">PROTOCOLO DE COLETA — VIA DO ASSINANTE <span style="font-weight:400;font-size:12px">Emissão: <span id="emissao"></span></span></div>
+      <div class="title">PROTOCOLO DE COLETA — VIA DO ASSINANTE</div>
       <div class="grid">
         <div class="row"><div class="label">Ordem de Serviço:</div><div class="value" id="os"></div></div>
         <div class="row"><div class="label">Contrato/Assinante:</div><div class="value" id="ct"></div></div>
