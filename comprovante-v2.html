@@ -751,6 +751,16 @@ function definirTituloPDF(os, nome){
   }
 }
 
+function imprimirComNomePDF(){
+  const dados = window.dadosComprovante || getDadosComprovante();
+
+  definirTituloPDF(dados.os, dados.nome);
+
+  setTimeout(() => {
+    window.print();
+  }, 300);
+}
+
 function getDadosComprovante(){
   const compacto = getHashParam("d");
 
@@ -848,6 +858,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const dados = getDadosComprovante();
   const dataEmissao = new Date().toLocaleDateString("pt-BR");
 
+  window.dadosComprovante = dados;
+
   setText(".js-os", dados.os);
   setText(".js-nome", dados.nome);
   setText(".js-endereco", dados.endereco);
@@ -866,7 +878,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <body>
 
 <div class="toolbar">
-  <button class="btn-print" onclick="window.print()">Imprimir / PDF</button>
+  <button class="btn-print" onclick="imprimirComNomePDF()">Imprimir / PDF</button>
 </div>
 
 <main class="page">
