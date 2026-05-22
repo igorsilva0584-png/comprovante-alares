@@ -288,53 +288,72 @@ body{
   color:#444;
 }
 
-.manual-fields{
-  display:grid;
-  grid-template-columns:1fr 110px;
-  gap:8px;
-  margin-bottom:4px;
-  font-size:8.3px;
-  color:#444;
+/* BLOCO PROFISSIONAL DE DATA, HORA E ASSINATURAS */
+.signature-section{
+  padding:6px 8px;
 }
 
-.manual-field{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-
-.manual-field span{
-  color:#3B35C4;
-  font-weight:800;
-  white-space:nowrap;
-}
-
-.manual-line{
-  flex:1;
-  color:#555;
-  border-bottom:1px solid #BDB7FF;
-  padding-bottom:1px;
-  text-align:center;
-  font-weight:700;
-}
-
-.signature-wrap{
+.signature-row{
   display:grid;
   grid-template-columns:1fr;
   gap:4px;
+  margin-top:3px;
 }
 
-.signature{
-  border:1.5px dashed #BDB7FF;
-  border-radius:8px;
-  height:25px;
+.signature-row-client{
+  grid-template-columns:1fr 235px;
+  align-items:end;
+  gap:14px;
+}
+
+.signature-line-box{
   display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  padding-bottom:3px;
-  color:#9A91EF;
+  flex-direction:column;
+  gap:2px;
+}
+
+.signature-line-box.full{
+  width:100%;
+}
+
+.signature-line{
+  height:21px;
+  border-bottom:1.5px solid #9A91EF;
+}
+
+.signature-label{
+  text-align:center;
   font-size:7.8px;
-  background:#fff;
+  color:#3B35C4;
+  font-weight:700;
+}
+
+.date-time-box{
+  display:grid;
+  grid-template-columns:1fr 75px;
+  gap:8px;
+  align-items:end;
+  padding-bottom:11px;
+}
+
+.date-time-field{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:8.3px;
+  color:#444;
+  white-space:nowrap;
+}
+
+.date-time-field span{
+  color:#3B35C4;
+  font-weight:900;
+}
+
+.date-time-field strong{
+  color:#333;
+  font-weight:700;
+  letter-spacing:.3px;
 }
 
 .client-message{
@@ -427,8 +446,14 @@ body{
     padding-top:6px;
   }
 
-  .manual-fields{
+  .signature-row-client{
     grid-template-columns:1fr;
+    gap:4px;
+  }
+
+  .date-time-box{
+    grid-template-columns:1fr 85px;
+    padding-bottom:0;
   }
 
   .logo{
@@ -599,29 +624,38 @@ body{
     font-size:8px;
   }
 
-  .manual-fields{
-    grid-template-columns:1fr 90px;
-    gap:6px;
-    margin-bottom:3px;
-    font-size:7.1px;
+  .signature-section{
+    padding:4px 6px;
   }
 
-  .manual-field{
-    gap:4px;
+  .signature-row{
+    gap:2px;
+    margin-top:2px;
   }
 
-  .manual-line{
-    padding-bottom:1px;
+  .signature-row-client{
+    grid-template-columns:1fr 198px;
+    gap:10px;
   }
 
-  .signature-wrap{
+  .signature-line{
+    height:16px;
+    border-bottom:1.2px solid #9A91EF;
+  }
+
+  .signature-label{
+    font-size:6.4px;
+  }
+
+  .date-time-box{
+    grid-template-columns:1fr 62px;
+    gap:5px;
+    padding-bottom:8px;
+  }
+
+  .date-time-field{
     gap:3px;
-  }
-
-  .signature{
-    height:20px;
     font-size:6.8px;
-    padding-bottom:2px;
   }
 
   .privacy{
@@ -855,21 +889,30 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="section signature-section">
         <div class="section-title">Data, hora e assinaturas</div>
 
-        <div class="manual-fields">
-          <div class="manual-field">
-            <span>Data da retirada:</span>
-            <div class="manual-line">____/____/________</div>
+        <div class="signature-row signature-row-client">
+          <div class="signature-line-box">
+            <div class="signature-line"></div>
+            <div class="signature-label">Assinatura do cliente</div>
           </div>
 
-          <div class="manual-field">
-            <span>Hora:</span>
-            <div class="manual-line">____:____</div>
+          <div class="date-time-box">
+            <div class="date-time-field">
+              <span>Data:</span>
+              <strong>____/____/________</strong>
+            </div>
+
+            <div class="date-time-field">
+              <span>Hora:</span>
+              <strong>____:____</strong>
+            </div>
           </div>
         </div>
 
-        <div class="signature-wrap">
-          <div class="signature">Assinatura do cliente</div>
-          <div class="signature">Assinatura da terceirizada</div>
+        <div class="signature-row">
+          <div class="signature-line-box full">
+            <div class="signature-line"></div>
+            <div class="signature-label">Assinatura da terceirizada</div>
+          </div>
         </div>
       </div>
 
@@ -971,4 +1014,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-``
