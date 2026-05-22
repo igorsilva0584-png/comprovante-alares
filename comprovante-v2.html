@@ -1,10 +1,633 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Comprovante V2</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comprovante de Retirada - V2</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Calibri, Arial, sans-serif;
+  background:#ededf5;
+  color:#222;
+  padding:24px 12px;
+}
+
+.toolbar{
+  max-width:794px;
+  margin:0 auto 16px auto;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.btn-print{
+  background:#3B35C4;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:10px 22px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,.18);
+}
+
+.btn-print:hover{
+  background:#2D28A0;
+}
+
+.page{
+  width:794px;
+  min-height:1123px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid #d8d8e8;
+  box-shadow:0 6px 22px rgba(0,0,0,.12);
+  padding:22px;
+}
+
+.via{
+  height:505px;
+  border:1px solid #D7D5F6;
+  border-radius:10px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.header{
+  background:#3B35C4;
+  color:#fff;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo-box{
+  display:flex;
+  flex-direction:column;
+}
+
+.logo{
+  font-family:Arial Black, Arial, sans-serif;
+  font-size:28px;
+  letter-spacing:4px;
+  font-weight:900;
+  line-height:1;
+}
+
+.logo-sub{
+  font-size:11px;
+  letter-spacing:1.4px;
+  color:#D8D5FF;
+  margin-top:6px;
+}
+
+.header-right{
+  text-align:right;
+}
+
+.header-right-main{
+  font-family:Arial Black, Arial, sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+  font-weight:900;
+}
+
+.header-right-sub{
+  font-family:Arial Black, Arial, sans-serif;
+  font-size:14px;
+  letter-spacing:1.5px;
+  color:#BFB8FF;
+  font-weight:900;
+}
+
+.title-bar{
+  background:#2D28A0;
+  color:#fff;
+  padding:9px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.title-left{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.doc-title{
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+
+.via-label{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.4px;
+  color:#D8D5FF;
+}
+
+.os-box{
+  font-size:14px;
+  white-space:nowrap;
+}
+
+.content{
+  padding:14px 18px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.section{
+  border:1px solid #EEEDFE;
+  border-radius:8px;
+  padding:9px 11px;
+}
+
+.section-title{
+  font-size:10px;
+  font-weight:900;
+  color:#3B35C4;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  row-gap:5px;
+  column-gap:8px;
+  font-size:13px;
+}
+
+.label{
+  color:#777;
+}
+
+.value{
+  color:#222;
+  font-weight:600;
+  word-break:break-word;
+}
+
+.serial-box{
+  background:#EEEDFE;
+  border-radius:8px;
+  padding:8px 10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  color:#2D28A0;
+  font-weight:700;
+  word-break:break-word;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  background:#3B35C4;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.declaracao{
+  font-size:12.5px;
+  line-height:1.35;
+  color:#444;
+}
+
+.signature-wrap{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  margin-top:2px;
+}
+
+.signature{
+  border:1.5px dashed #BDB7FF;
+  border-radius:8px;
+  height:54px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:7px;
+  color:#9A91EF;
+  font-size:11px;
+}
+
+.client-message{
+  background:#F7F7FD;
+  border-left:4px solid #3B35C4;
+  padding:10px 12px;
+  border-radius:7px;
+  font-size:12.5px;
+  line-height:1.35;
+  color:#444;
+}
+
+.privacy{
+  font-size:9.5px;
+  line-height:1.25;
+  color:#777;
+  margin-top:auto;
+  border-top:1px solid #EEEDFE;
+  padding-top:7px;
+}
+
+.cut-line{
+  height:67px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  color:#777;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.cut-line::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:50%;
+  border-top:2px dashed #999;
+}
+
+.cut-line span{
+  background:#fff;
+  padding:0 14px;
+  position:relative;
+  z-index:1;
+}
+
+.footer-note{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  font-size:11px;
+  color:#666;
+  margin-top:4px;
+}
+
+/* Ajustes para telas menores */
+@media screen and (max-width:840px){
+  .page{
+    width:100%;
+    min-height:auto;
+    padding:12px;
+  }
+
+  .via{
+    height:auto;
+    min-height:505px;
+  }
+
+  .toolbar{
+    width:100%;
+  }
+
+  .grid{
+    grid-template-columns:95px 1fr;
+  }
+
+  .logo{
+    font-size:23px;
+  }
+
+  .doc-title{
+    font-size:13px;
+  }
+}
+
+/* Impressão A4 */
+@page{
+  size:A4 portrait;
+  margin:8mm;
+}
+
+@media print{
+  body{
+    background:#fff;
+    padding:0;
+  }
+
+  .toolbar{
+    display:none;
+  }
+
+  .page{
+    width:100%;
+    min-height:auto;
+    height:auto;
+    margin:0;
+    padding:0;
+    border:none;
+    box-shadow:none;
+  }
+
+  .via{
+    height:128mm;
+    border-radius:7px;
+    page-break-inside:avoid;
+  }
+
+  .cut-line{
+    height:12mm;
+  }
+
+  .header{
+    padding:10px 14px;
+  }
+
+  .logo{
+    font-size:24px;
+  }
+
+  .logo-sub{
+    font-size:9px;
+  }
+
+  .title-bar{
+    padding:7px 14px;
+  }
+
+  .content{
+    padding:10px 14px;
+    gap:7px;
+  }
+
+  .section{
+    padding:7px 9px;
+  }
+
+  .grid{
+    font-size:11.5px;
+    row-gap:3px;
+    grid-template-columns:105px 1fr;
+  }
+
+  .section-title{
+    font-size:9px;
+    margin-bottom:5px;
+  }
+
+  .serial-box{
+    font-size:11.5px;
+    padding:6px 8px;
+  }
+
+  .declaracao,
+  .client-message{
+    font-size:11px;
+  }
+
+  .signature{
+    height:42px;
+    font-size:10px;
+  }
+
+  .privacy{
+    font-size:8px;
+  }
+
+  .footer-note{
+    font-size:9px;
+  }
+}
+</style>
+
+<script>
+/*
+  Parâmetros esperados na URL:
+  #o=OS
+  &n=Nome
+  &e=Endereco
+  &c=Cidade
+  &s=Serial
+  &t=Terceirizada
+
+  Compatibilidade adicional com parâmetros antigos:
+  os, nm, end, cid, eq
+*/
+
+function getHashParam(name){
+  const raw = location.hash.startsWith("#") ? location.hash.slice(1) : location.hash;
+  const params = new URLSearchParams(raw);
+  return params.get(name) || "";
+}
+
+function setText(selector, value){
+  document.querySelectorAll(selector).forEach(el => {
+    el.textContent = value;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const os = getHashParam("o") || getHashParam("os") || "—";
+  const nome = getHashParam("n") || getHashParam("nm") || "—";
+  const endereco = getHashParam("e") || getHashParam("end") || "—";
+  const cidade = getHashParam("c") || getHashParam("cid") || "—";
+  const serial = getHashParam("s") || getHashParam("eq") || "Não informado";
+  const terceirizada = getHashParam("t") || getHashParam("terceirizada") || "—";
+  const dataEmissao = new Date().toLocaleDateString("pt-BR");
+
+  setText(".js-os", os);
+  setText(".js-nome", nome);
+  setText(".js-endereco", endereco);
+  setText(".js-cidade", cidade);
+  setText(".js-serial", serial);
+  setText(".js-terceirizada", terceirizada);
+  setText(".js-data", dataEmissao);
+});
+</script>
 </head>
+
 <body>
-  <h1>Comprovante V2 criado com sucesso</h1>
+
+<div class="toolbar">
+  <button class="btn-print" onclick="window.print()">Imprimir / PDF</button>
+</div>
+
+<main class="page">
+
+  <!-- VIA DA TERCEIRIZADA -->
+  <section class="via">
+    <div class="header">
+      <div class="logo-box">
+        <div class="logo">ALARES</div>
+        <div class="logo-sub">Logística Reversa</div>
+      </div>
+
+      <div class="header-right">
+        <div class="header-right-main">LOGÍSTICA</div>
+        <div class="header-right-sub">REVERSA</div>
+      </div>
+    </div>
+
+    <div class="title-bar">
+      <div class="title-left">
+        <div class="doc-title">Comprovante de Retirada de Equipamento</div>
+        <div class="via-label">VIA DA TERCEIRIZADA</div>
+      </div>
+      <div class="os-box">OS #<span class="js-os">—</span></div>
+    </div>
+
+    <div class="content">
+
+      <div class="section">
+        <div class="section-title">Dados do cliente</div>
+        <div class="grid">
+          <div class="label">Nome</div>
+          <div class="value js-nome">—</div>
+
+          <div class="label">Endereço</div>
+          <div class="value js-endereco">—</div>
+
+          <div class="label">Cidade</div>
+          <div class="value js-cidade">—</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Dados da retirada</div>
+        <div class="grid">
+          <div class="label">Terceirizada</div>
+          <div class="value js-terceirizada">—</div>
+
+          <div class="label">Emitido em</div>
+          <div class="value js-data">—</div>
+        </div>
+
+        <div style="height:8px"></div>
+
+        <div class="serial-box">
+          <div class="dot"></div>
+          <div>Serial/equipamento: <span class="js-serial">Não informado</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Declaração</div>
+        <div class="declaracao">
+          Declaro que o equipamento informado neste comprovante foi retirado no endereço indicado,
+          conforme ordem de serviço registrada pela Logística Reversa Alares.
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Assinatura do cliente</div>
+        <div class="signature-wrap">
+          <div class="signature">Assinatura do cliente</div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <span>Documento gerado online.</span>
+        <span>OS #<span class="js-os">—</span></span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LINHA DE RECORTE -->
+  <div class="cut-line">
+    <span>RECORTE AQUI</span>
+  </div>
+
+  <!-- VIA DO CLIENTE -->
+  <section class="via">
+    <div class="header">
+      <div class="logo-box">
+        <div class="logo">ALARES</div>
+        <div class="logo-sub">Logística Reversa</div>
+      </div>
+
+      <div class="header-right">
+        <div class="header-right-main">LOGÍSTICA</div>
+        <div class="header-right-sub">REVERSA</div>
+      </div>
+    </div>
+
+    <div class="title-bar">
+      <div class="title-left">
+        <div class="doc-title">Comprovante de Retirada de Equipamento</div>
+        <div class="via-label">VIA DO CLIENTE</div>
+      </div>
+      <div class="os-box">OS #<span class="js-os">—</span></div>
+    </div>
+
+    <div class="content">
+
+      <div class="section">
+        <div class="section-title">Dados do cliente</div>
+        <div class="grid">
+          <div class="label">Nome</div>
+          <div class="value js-nome">—</div>
+
+          <div class="label">Endereço</div>
+          <div class="value js-endereco">—</div>
+
+          <div class="label">Cidade</div>
+          <div class="value js-cidade">—</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Equipamento retirado</div>
+
+        <div class="serial-box">
+          <div class="dot"></div>
+          <div>Serial/equipamento: <span class="js-serial">Não informado</span></div>
+        </div>
+
+        <div style="height:8px"></div>
+
+        <div class="grid">
+          <div class="label">Terceirizada</div>
+          <div class="value js-terceirizada">—</div>
+
+          <div class="label">Emitido em</div>
+          <div class="value js-data">—</div>
+        </div>
+      </div>
+
+      <div class="client-message">
+        Este comprovante confirma a retirada do equipamento informado pela equipe de Logística Reversa da Alares.
+        <br><br>
+        Retirada realizada pela terceirizada: <strong><span class="js-terceirizada">—</span></strong>.
+        <br><br>
+        Guarde este comprovante para eventual consulta.
+      </div>
+
+      <div class="privacy">
+        Aviso de privacidade: esta página não coleta dados de visitantes.
+        Os dados exibidos são preenchidos a partir do link gerado na agenda.
+        O provedor de hospedagem pode registrar informações técnicas, como endereço IP, por motivos de segurança.
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
 </body>
 </html>
+``
