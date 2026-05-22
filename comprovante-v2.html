@@ -185,10 +185,16 @@ body{
   word-break:break-word;
 }
 
-.serial-box{
+.equip-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.equip-item{
   background:#EEEDFE;
   border-radius:8px;
-  padding:8px 10px;
+  padding:7px 10px;
   display:flex;
   align-items:center;
   gap:8px;
@@ -198,12 +204,22 @@ body{
   word-break:break-word;
 }
 
-.dot{
-  width:8px;
-  height:8px;
+.equip-number{
   background:#3B35C4;
+  color:#fff;
+  min-width:20px;
+  height:20px;
   border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:900;
   flex-shrink:0;
+}
+
+.equip-text{
+  line-height:1.25;
 }
 
 .declaracao{
@@ -389,9 +405,15 @@ body{
     margin-bottom:5px;
   }
 
-  .serial-box{
+  .equip-item{
     font-size:11.5px;
-    padding:6px 8px;
+    padding:5px 8px;
+  }
+
+  .equip-number{
+    min-width:18px;
+    height:18px;
+    font-size:10px;
   }
 
   .declaracao,
@@ -421,7 +443,7 @@ body{
   &n=Nome
   &e=Endereco
   &c=Cidade
-  &s=Serial
+  &s=Serial1|Serial2|Serial3
   &t=Terceirizada
 
   Compatibilidade adicional com parâmetros antigos:
@@ -440,6 +462,40 @@ function setText(selector, value){
   });
 }
 
+function renderEquipamentos(serialTexto){
+  const equipamentos = serialTexto
+    .split("|")
+    .map(item => item.trim())
+    .filter(item => item !== "");
+
+  const listaFinal = equipamentos.length > 0 ? equipamentos : ["Não informado"];
+
+  document.querySelectorAll(".js-equip-list").forEach(container => {
+    container.innerHTML = "";
+
+    listaFinal.forEach((equipamento, index) => {
+      const item = document.createElement("div");
+      item.className = "equip-item";
+
+      const numero = document.createElement("div");
+      numero.className = "equip-number";
+      numero.textContent = index + 1;
+
+      const texto = document.createElement("div");
+      texto.className = "equip-text";
+      texto.textContent = "Serial/equipamento: " + equipamento;
+
+      item.appendChild(numero);
+      item.appendChild(texto);
+      container.appendChild(item);
+    });
+  });
+
+  const qtd = listaFinal.length;
+  const tituloEquipamento = qtd > 1 ? "Equipamentos retirados" : "Equipamento retirado";
+  setText(".js-titulo-equipamento", tituloEquipamento);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const os = getHashParam("o") || getHashParam("os") || "—";
   const nome = getHashParam("n") || getHashParam("nm") || "—";
@@ -453,9 +509,10 @@ document.addEventListener("DOMContentLoaded", () => {
   setText(".js-nome", nome);
   setText(".js-endereco", endereco);
   setText(".js-cidade", cidade);
-  setText(".js-serial", serial);
   setText(".js-terceirizada", terceirizada);
   setText(".js-data", dataEmissao);
+
+  renderEquipamentos(serial);
 });
 </script>
 </head>
@@ -518,17 +575,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div style="height:8px"></div>
 
-        <div class="serial-box">
-          <div class="dot"></div>
-          <div>Serial/equipamento: <span class="js-serial">Não informado</span></div>
-        </div>
+        <div class="section-title js-titulo-equipamento">Equipamento retirado</div>
+        <div class="equip-list js-equip-list"></div>
       </div>
 
       <div class="section">
         <div class="section-title">Declaração</div>
         <div class="declaracao">
-          Declaro que o equipamento informado neste comprovante foi retirado no endereço indicado,
-          conforme ordem de serviço registrada pela Logística Reversa Alares.
+          Declaro que o(s) equipamento(s) informado(s) neste comprovante foi/foram retirado(s)
+          no endereço indicado, conforme ordem de serviço registrada pela Logística Reversa Alares.
         </div>
       </div>
 
@@ -591,12 +646,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="section">
-        <div class="section-title">Equipamento retirado</div>
-
-        <div class="serial-box">
-          <div class="dot"></div>
-          <div>Serial/equipamento: <span class="js-serial">Não informado</span></div>
-        </div>
+        <div class="section-title js-titulo-equipamento">Equipamento retirado</div>
+        <div class="equip-list js-equip-list"></div>
 
         <div style="height:8px"></div>
 
@@ -610,9 +661,11 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="client-message">
-        Este comprovante confirma a retirada do equipamento informado pela equipe de Logística Reversa da Alares.
+        Este comprovante confirma a retirada do(s) equipamento(s) informado(s)
+        pela equipe de Logística Reversa da Alares.
         <br><br>
-        Retirada realizada pela terceirizada: <strong><span class="js-terceirizada">—</span></strong>.
+        Retirada realizada pela terceirizada:
+        <strong><span class="js-terceirizada">—</span></strong>.
         <br><br>
         Guarde este comprovante para eventual consulta.
       </div>
@@ -630,4 +683,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-``
