@@ -65,7 +65,7 @@ body{
 .header{
   background:#3B35C4;
   color:#fff;
-  padding:14px 18px;
+  padding:11px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -78,17 +78,17 @@ body{
 
 .logo{
   font-family:Arial Black, Arial, sans-serif;
-  font-size:28px;
+  font-size:25px;
   letter-spacing:4px;
   font-weight:900;
   line-height:1;
 }
 
 .logo-sub{
-  font-size:11px;
+  font-size:10px;
   letter-spacing:1.4px;
   color:#D8D5FF;
-  margin-top:6px;
+  margin-top:5px;
 }
 
 .header-right{
@@ -97,14 +97,14 @@ body{
 
 .header-right-main{
   font-family:Arial Black, Arial, sans-serif;
-  font-size:14px;
+  font-size:13px;
   letter-spacing:1.5px;
   font-weight:900;
 }
 
 .header-right-sub{
   font-family:Arial Black, Arial, sans-serif;
-  font-size:14px;
+  font-size:13px;
   letter-spacing:1.5px;
   color:#BFB8FF;
   font-weight:900;
@@ -113,7 +113,7 @@ body{
 .title-bar{
   background:#2D28A0;
   color:#fff;
-  padding:9px 18px;
+  padding:7px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -127,52 +127,52 @@ body{
 }
 
 .doc-title{
-  font-size:15px;
+  font-size:14px;
   font-weight:800;
   letter-spacing:.5px;
 }
 
 .via-label{
-  font-size:10px;
+  font-size:9.5px;
   font-weight:800;
   letter-spacing:1.4px;
   color:#D8D5FF;
 }
 
 .os-box{
-  font-size:14px;
+  font-size:13px;
   white-space:nowrap;
 }
 
 .content{
-  padding:14px 18px;
+  padding:10px 16px;
   flex:1;
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:6px;
 }
 
 .section{
   border:1px solid #EEEDFE;
   border-radius:8px;
-  padding:9px 11px;
+  padding:7px 9px;
 }
 
 .section-title{
-  font-size:10px;
+  font-size:9.3px;
   font-weight:900;
   color:#3B35C4;
-  letter-spacing:1.6px;
+  letter-spacing:1.4px;
   text-transform:uppercase;
-  margin-bottom:7px;
+  margin-bottom:5px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:120px 1fr;
-  row-gap:5px;
-  column-gap:8px;
-  font-size:13px;
+  grid-template-columns:88px 1fr 68px 1fr;
+  row-gap:4px;
+  column-gap:7px;
+  font-size:11.5px;
 }
 
 .label{
@@ -188,17 +188,18 @@ body{
 .equip-list{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:5px;
 }
 
 .equip-item{
   background:#EEEDFE;
   border-radius:8px;
-  padding:7px 10px;
-  display:flex;
+  padding:5px 7px;
+  display:grid;
+  grid-template-columns:22px 1fr 145px;
   align-items:center;
-  gap:8px;
-  font-size:13px;
+  gap:7px;
+  font-size:11.5px;
   color:#2D28A0;
   font-weight:700;
   word-break:break-word;
@@ -207,13 +208,13 @@ body{
 .equip-number{
   background:#3B35C4;
   color:#fff;
-  min-width:20px;
+  width:20px;
   height:20px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:11px;
+  font-size:10.5px;
   font-weight:900;
   flex-shrink:0;
 }
@@ -222,9 +223,52 @@ body{
   line-height:1.25;
 }
 
+.devolvido-box{
+  border-left:1px solid #C8C3FF;
+  padding-left:7px;
+  color:#2D28A0;
+  font-size:10px;
+  font-weight:900;
+}
+
+.devolvido-title{
+  text-align:center;
+  font-size:8.5px;
+  letter-spacing:.8px;
+  margin-bottom:3px;
+}
+
+.devolvido-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+  text-align:center;
+}
+
+.check-option{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+}
+
+.check-square{
+  width:18px;
+  height:18px;
+  border:1.6px solid #3B35C4;
+  background:#fff;
+  border-radius:2px;
+}
+
+.check-label{
+  font-size:8.5px;
+  color:#2D28A0;
+  font-weight:900;
+}
+
 .declaracao{
-  font-size:12.5px;
-  line-height:1.35;
+  font-size:10.8px;
+  line-height:1.25;
   color:#444;
 }
 
@@ -238,32 +282,32 @@ body{
 .signature{
   border:1.5px dashed #BDB7FF;
   border-radius:8px;
-  height:54px;
+  height:38px;
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  padding-bottom:7px;
+  padding-bottom:5px;
   color:#9A91EF;
-  font-size:11px;
+  font-size:9.5px;
 }
 
 .client-message{
   background:#F7F7FD;
   border-left:4px solid #3B35C4;
-  padding:10px 12px;
+  padding:7px 10px;
   border-radius:7px;
-  font-size:12.5px;
-  line-height:1.35;
+  font-size:10.8px;
+  line-height:1.25;
   color:#444;
 }
 
 .privacy{
-  font-size:9.5px;
-  line-height:1.25;
+  font-size:8.2px;
+  line-height:1.15;
   color:#777;
   margin-top:auto;
   border-top:1px solid #EEEDFE;
-  padding-top:7px;
+  padding-top:4px;
 }
 
 .cut-line{
@@ -298,9 +342,9 @@ body{
   display:flex;
   justify-content:space-between;
   gap:8px;
-  font-size:11px;
+  font-size:9px;
   color:#666;
-  margin-top:4px;
+  margin-top:1px;
 }
 
 /* Ajustes para telas menores */
@@ -321,7 +365,19 @@ body{
   }
 
   .grid{
-    grid-template-columns:95px 1fr;
+    grid-template-columns:85px 1fr;
+  }
+
+  .equip-item{
+    grid-template-columns:22px 1fr;
+  }
+
+  .devolvido-box{
+    grid-column:1 / -1;
+    border-left:none;
+    border-top:1px solid #C8C3FF;
+    padding-left:0;
+    padding-top:6px;
   }
 
   .logo{
@@ -370,79 +426,124 @@ body{
   }
 
   .header{
-    padding:10px 14px;
+    padding:8px 14px;
   }
 
   .logo{
-    font-size:24px;
+    font-size:22px;
   }
 
   .logo-sub{
-    font-size:9px;
+    font-size:8px;
+  }
+
+  .header-right-main,
+  .header-right-sub{
+    font-size:11.5px;
   }
 
   .title-bar{
-    padding:7px 14px;
+    padding:6px 14px;
+  }
+
+  .doc-title{
+    font-size:12px;
+  }
+
+  .via-label{
+    font-size:8px;
   }
 
   .content{
-    padding:10px 14px;
-    gap:7px;
+    padding:7px 12px;
+    gap:4px;
   }
 
   .section{
-    padding:7px 9px;
+    padding:5px 7px;
   }
 
   .grid{
-    font-size:11.5px;
-    row-gap:3px;
-    grid-template-columns:105px 1fr;
+    font-size:9.8px;
+    row-gap:2.5px;
+    grid-template-columns:70px 1fr 54px 1fr;
   }
 
   .section-title{
-    font-size:9px;
-    margin-bottom:5px;
+    font-size:8px;
+    margin-bottom:3px;
+  }
+
+  .equip-list{
+    gap:3px;
   }
 
   .equip-item{
-    font-size:11.5px;
-    padding:5px 8px;
+    font-size:9.7px;
+    padding:4px 6px;
+    grid-template-columns:19px 1fr 120px;
+    gap:5px;
   }
 
   .equip-number{
-    min-width:18px;
-    height:18px;
-    font-size:10px;
+    width:16px;
+    height:16px;
+    font-size:8.5px;
+  }
+
+  .devolvido-box{
+    font-size:8px;
+    padding-left:5px;
+  }
+
+  .devolvido-title{
+    font-size:7px;
+    margin-bottom:2px;
+  }
+
+  .devolvido-options{
+    gap:4px;
+  }
+
+  .check-square{
+    width:14px;
+    height:14px;
+  }
+
+  .check-label{
+    font-size:7px;
   }
 
   .declaracao,
   .client-message{
-    font-size:11px;
+    font-size:9.2px;
   }
 
   .signature{
-    height:42px;
-    font-size:10px;
+    height:31px;
+    font-size:8.3px;
   }
 
   .privacy{
-    font-size:8px;
+    font-size:7px;
   }
 
   .footer-note{
-    font-size:9px;
+    font-size:7.8px;
   }
 }
 </style>
 
 <script>
 /*
-  FORMATO COMPACTO RECOMENDADO:
+  FORMATO COMPACTO ATUALIZADO:
+  #d=OS~Nome~Endereco~Bairro~Cidade~Carteira~Serial1|Serial2|Serial3~Terceirizada
+
+  FORMATO COMPACTO ANTERIOR TAMBÉM ACEITO:
   #d=OS~Nome~Endereco~Cidade~Serial1|Serial2|Serial3~Terceirizada
 
   FORMATO NOVO TAMBÉM ACEITO:
-  #o=OS&n=Nome&e=Endereco&c=Cidade&s=Serial1|Serial2&t=Terceirizada
+  #o=OS&n=Nome&e=Endereco&b=Bairro&c=Cidade&k=Carteira&s=Serial1|Serial2&t=Terceirizada
 
   FORMATO ANTIGO TAMBÉM ACEITO:
   #os=OS&nm=Nome&end=Endereco&cid=Cidade&eq=Serial
@@ -466,11 +567,26 @@ function getDadosComprovante(){
   if (compacto){
     const partes = compacto.split("~");
 
+    if (partes.length >= 8){
+      return {
+        os: partes[0] || "—",
+        nome: partes[1] || "—",
+        endereco: partes[2] || "—",
+        bairro: partes[3] || "—",
+        cidade: partes[4] || "—",
+        carteira: partes[5] || "—",
+        serial: partes[6] || "Não informado",
+        terceirizada: partes[7] || "—"
+      };
+    }
+
     return {
       os: partes[0] || "—",
       nome: partes[1] || "—",
       endereco: partes[2] || "—",
+      bairro: "—",
       cidade: partes[3] || "—",
+      carteira: "—",
       serial: partes[4] || "Não informado",
       terceirizada: partes[5] || "—"
     };
@@ -480,7 +596,9 @@ function getDadosComprovante(){
     os: getHashParam("o") || getHashParam("os") || "—",
     nome: getHashParam("n") || getHashParam("nm") || "—",
     endereco: getHashParam("e") || getHashParam("end") || "—",
+    bairro: getHashParam("b") || "—",
     cidade: getHashParam("c") || getHashParam("cid") || "—",
+    carteira: getHashParam("k") || "—",
     serial: getHashParam("s") || getHashParam("eq") || "Não informado",
     terceirizada: getHashParam("t") || getHashParam("terceirizada") || "—"
   };
@@ -509,8 +627,25 @@ function renderEquipamentos(serialTexto){
       texto.className = "equip-text";
       texto.textContent = "Serial/equipamento: " + equipamento;
 
+      const devolvido = document.createElement("div");
+      devolvido.className = "devolvido-box";
+      devolvido.innerHTML = `
+        <div class="devolvido-title">DEVOLVIDO</div>
+        <div class="devolvido-options">
+          <div class="check-option">
+            <div class="check-square"></div>
+            <div class="check-label">SIM</div>
+          </div>
+          <div class="check-option">
+            <div class="check-square"></div>
+            <div class="check-label">NÃO</div>
+          </div>
+        </div>
+      `;
+
       item.appendChild(numero);
       item.appendChild(texto);
+      item.appendChild(devolvido);
       container.appendChild(item);
     });
   });
@@ -527,7 +662,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setText(".js-os", dados.os);
   setText(".js-nome", dados.nome);
   setText(".js-endereco", dados.endereco);
+  setText(".js-bairro", dados.bairro);
   setText(".js-cidade", dados.cidade);
+  setText(".js-carteira", dados.carteira);
   setText(".js-terceirizada", dados.terceirizada);
   setText(".js-data", dataEmissao);
 
@@ -574,25 +711,34 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="label">Nome</div>
           <div class="value js-nome">—</div>
 
+          <div class="label">Cidade</div>
+          <div class="value js-cidade">—</div>
+
           <div class="label">Endereço</div>
           <div class="value js-endereco">—</div>
 
-          <div class="label">Cidade</div>
-          <div class="value js-cidade">—</div>
+          <div class="label">Bairro</div>
+          <div class="value js-bairro">—</div>
         </div>
       </div>
 
       <div class="section">
         <div class="section-title">Dados da retirada</div>
         <div class="grid">
+          <div class="label">Carteira</div>
+          <div class="value js-carteira">—</div>
+
           <div class="label">Terceirizada</div>
           <div class="value js-terceirizada">—</div>
 
           <div class="label">Emitido em</div>
           <div class="value js-data">—</div>
+
+          <div class="label">OS</div>
+          <div class="value">#<span class="js-os">—</span></div>
         </div>
 
-        <div style="height:8px"></div>
+        <div style="height:5px"></div>
 
         <div class="section-title js-titulo-equipamento">Equipamento retirado</div>
         <div class="equip-list js-equip-list"></div>
@@ -656,36 +802,45 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="label">Nome</div>
           <div class="value js-nome">—</div>
 
+          <div class="label">Cidade</div>
+          <div class="value js-cidade">—</div>
+
           <div class="label">Endereço</div>
           <div class="value js-endereco">—</div>
 
-          <div class="label">Cidade</div>
-          <div class="value js-cidade">—</div>
+          <div class="label">Bairro</div>
+          <div class="value js-bairro">—</div>
         </div>
       </div>
 
       <div class="section">
-        <div class="section-title js-titulo-equipamento">Equipamento retirado</div>
-        <div class="equip-list js-equip-list"></div>
-
-        <div style="height:8px"></div>
-
+        <div class="section-title">Dados da retirada</div>
         <div class="grid">
+          <div class="label">Carteira</div>
+          <div class="value js-carteira">—</div>
+
           <div class="label">Terceirizada</div>
           <div class="value js-terceirizada">—</div>
 
           <div class="label">Emitido em</div>
           <div class="value js-data">—</div>
+
+          <div class="label">OS</div>
+          <div class="value">#<span class="js-os">—</span></div>
         </div>
+
+        <div style="height:5px"></div>
+
+        <div class="section-title js-titulo-equipamento">Equipamento retirado</div>
+        <div class="equip-list js-equip-list"></div>
       </div>
 
       <div class="client-message">
         Este comprovante confirma a retirada do(s) equipamento(s) informado(s)
         pela equipe de Logística Reversa da Alares.
-        <br><br>
+        <br>
         Retirada realizada pela terceirizada:
         <strong><span class="js-terceirizada">—</span></strong>.
-        <br><br>
         Guarde este comprovante para eventual consulta.
       </div>
 
