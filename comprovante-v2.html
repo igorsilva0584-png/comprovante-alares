@@ -10,6 +10,14 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+html,
+body{
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 body{
@@ -51,24 +59,32 @@ body{
   border:1px solid #d8d8e8;
   box-shadow:0 6px 22px rgba(0,0,0,.12);
   padding:22px;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 .via{
-  height:505px;
+  min-height:505px;
+  height:auto;
   border:1px solid #D7D5F6;
   border-radius:10px;
-  overflow:hidden;
+  overflow:visible;
   display:flex;
   flex-direction:column;
+  background:#fff;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 .header{
-  background:#3B35C4;
-  color:#fff;
-  padding:11px 18px;
+  background:#3B35C4 !important;
+  color:#fff !important;
+  padding:10px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 .logo-box{
@@ -82,13 +98,14 @@ body{
   letter-spacing:4px;
   font-weight:900;
   line-height:1;
+  color:#fff !important;
 }
 
 .logo-sub{
-  font-size:10px;
+  font-size:9.5px;
   letter-spacing:1.4px;
-  color:#D8D5FF;
-  margin-top:5px;
+  color:#D8D5FF !important;
+  margin-top:4px;
 }
 
 .header-right{
@@ -100,24 +117,27 @@ body{
   font-size:13px;
   letter-spacing:1.5px;
   font-weight:900;
+  color:#fff !important;
 }
 
 .header-right-sub{
   font-family:Arial Black, Arial, sans-serif;
   font-size:13px;
   letter-spacing:1.5px;
-  color:#BFB8FF;
+  color:#BFB8FF !important;
   font-weight:900;
 }
 
 .title-bar{
-  background:#2D28A0;
-  color:#fff;
+  background:#2D28A0 !important;
+  color:#fff !important;
   padding:7px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 .title-left{
@@ -127,52 +147,56 @@ body{
 }
 
 .doc-title{
-  font-size:14px;
+  font-size:13.5px;
   font-weight:800;
   letter-spacing:.5px;
+  color:#fff !important;
 }
 
 .via-label{
-  font-size:9.5px;
+  font-size:9px;
   font-weight:800;
   letter-spacing:1.4px;
-  color:#D8D5FF;
+  color:#D8D5FF !important;
 }
 
 .os-box{
-  font-size:13px;
+  font-size:12.5px;
   white-space:nowrap;
+  color:#fff !important;
+  font-weight:700;
 }
 
 .content{
-  padding:10px 16px;
+  padding:9px 14px;
   flex:1;
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:5px;
 }
 
 .section{
   border:1px solid #EEEDFE;
   border-radius:8px;
-  padding:7px 9px;
+  padding:6px 8px;
+  background:#fff;
 }
 
 .section-title{
-  font-size:9.3px;
+  font-size:8.8px;
   font-weight:900;
   color:#3B35C4;
-  letter-spacing:1.4px;
+  letter-spacing:1.3px;
   text-transform:uppercase;
-  margin-bottom:5px;
+  margin-bottom:4px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:88px 1fr 68px 1fr;
-  row-gap:4px;
+  grid-template-columns:82px 1fr 64px 1fr;
+  row-gap:3px;
   column-gap:7px;
-  font-size:11.5px;
+  font-size:10.8px;
 }
 
 .label{
@@ -188,54 +212,58 @@ body{
 .equip-list{
   display:flex;
   flex-direction:column;
-  gap:5px;
+  gap:4px;
 }
 
 .equip-item{
-  background:#EEEDFE;
+  background:#EEEDFE !important;
   border-radius:8px;
   padding:5px 7px;
   display:grid;
-  grid-template-columns:22px 1fr 145px;
+  grid-template-columns:21px 1fr 140px;
   align-items:center;
   gap:7px;
-  font-size:11.5px;
+  font-size:10.8px;
   color:#2D28A0;
   font-weight:700;
   word-break:break-word;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 .equip-number{
-  background:#3B35C4;
-  color:#fff;
-  width:20px;
-  height:20px;
+  background:#3B35C4 !important;
+  color:#fff !important;
+  width:19px;
+  height:19px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:10.5px;
+  font-size:10px;
   font-weight:900;
   flex-shrink:0;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 .equip-text{
-  line-height:1.25;
+  line-height:1.22;
 }
 
 .devolvido-box{
   border-left:1px solid #C8C3FF;
   padding-left:7px;
   color:#2D28A0;
-  font-size:10px;
+  font-size:9.5px;
   font-weight:900;
 }
 
 .devolvido-title{
   text-align:center;
-  font-size:8.5px;
+  font-size:8px;
   letter-spacing:.8px;
-  margin-bottom:3px;
+  margin-bottom:2px;
 }
 
 .devolvido-options{
@@ -249,61 +277,63 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:2px;
+  gap:1px;
 }
 
 .check-square{
-  width:18px;
-  height:18px;
+  width:17px;
+  height:17px;
   border:1.6px solid #3B35C4;
-  background:#fff;
+  background:#fff !important;
   border-radius:2px;
 }
 
 .check-label{
-  font-size:8.5px;
+  font-size:8px;
   color:#2D28A0;
   font-weight:900;
 }
 
 .declaracao{
-  font-size:10.8px;
-  line-height:1.25;
+  font-size:10px;
+  line-height:1.22;
   color:#444;
 }
 
 .signature-wrap{
   display:grid;
   grid-template-columns:1fr;
-  gap:8px;
-  margin-top:2px;
+  gap:6px;
 }
 
 .signature{
   border:1.5px dashed #BDB7FF;
   border-radius:8px;
-  height:38px;
+  height:36px;
   display:flex;
   align-items:flex-end;
   justify-content:center;
   padding-bottom:5px;
   color:#9A91EF;
-  font-size:9.5px;
+  font-size:9px;
+  background:#fff;
 }
 
 .client-message{
-  background:#F7F7FD;
+  background:#F7F7FD !important;
   border-left:4px solid #3B35C4;
   padding:7px 10px;
   border-radius:7px;
-  font-size:10.8px;
-  line-height:1.25;
+  font-size:10.2px;
+  line-height:1.22;
   color:#444;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
 }
 
 .privacy{
-  font-size:8.2px;
-  line-height:1.15;
+  font-size:7.8px;
+  line-height:1.12;
   color:#777;
   margin-top:auto;
   border-top:1px solid #EEEDFE;
@@ -342,7 +372,7 @@ body{
   display:flex;
   justify-content:space-between;
   gap:8px;
-  font-size:9px;
+  font-size:8.5px;
   color:#666;
   margin-top:1px;
 }
@@ -357,7 +387,8 @@ body{
 
   .via{
     height:auto;
-    min-height:505px;
+    min-height:auto;
+    overflow:visible;
   }
 
   .toolbar{
@@ -365,11 +396,11 @@ body{
   }
 
   .grid{
-    grid-template-columns:85px 1fr;
+    grid-template-columns:82px 1fr;
   }
 
   .equip-item{
-    grid-template-columns:22px 1fr;
+    grid-template-columns:21px 1fr;
   }
 
   .devolvido-box{
@@ -396,13 +427,22 @@ body{
 }
 
 @media print{
+  *{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+
+  html,
   body{
-    background:#fff;
-    padding:0;
+    background:#fff !important;
+    padding:0 !important;
+    margin:0 !important;
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
   }
 
   .toolbar{
-    display:none;
+    display:none !important;
   }
 
   .page{
@@ -413,12 +453,16 @@ body{
     padding:0;
     border:none;
     box-shadow:none;
+    background:#fff !important;
   }
 
   .via{
     height:128mm;
+    min-height:128mm;
     border-radius:7px;
+    overflow:hidden;
     page-break-inside:avoid;
+    background:#fff !important;
   }
 
   .cut-line{
@@ -426,52 +470,65 @@ body{
   }
 
   .header{
-    padding:8px 14px;
+    background:#3B35C4 !important;
+    color:#fff !important;
+    padding:7px 12px;
   }
 
   .logo{
-    font-size:22px;
+    font-size:21px;
+    color:#fff !important;
   }
 
   .logo-sub{
-    font-size:8px;
+    font-size:7.8px;
+    color:#D8D5FF !important;
   }
 
   .header-right-main,
   .header-right-sub{
-    font-size:11.5px;
+    font-size:11px;
   }
 
   .title-bar{
-    padding:6px 14px;
+    background:#2D28A0 !important;
+    color:#fff !important;
+    padding:5px 12px;
   }
 
   .doc-title{
-    font-size:12px;
+    font-size:11.4px;
+    color:#fff !important;
   }
 
   .via-label{
-    font-size:8px;
+    font-size:7.7px;
+    color:#D8D5FF !important;
+  }
+
+  .os-box{
+    font-size:10.5px;
+    color:#fff !important;
   }
 
   .content{
-    padding:7px 12px;
-    gap:4px;
+    padding:6px 10px;
+    gap:3.5px;
   }
 
   .section{
-    padding:5px 7px;
+    padding:4.5px 6px;
   }
 
   .grid{
-    font-size:9.8px;
-    row-gap:2.5px;
-    grid-template-columns:70px 1fr 54px 1fr;
+    font-size:9.1px;
+    row-gap:2px;
+    grid-template-columns:64px 1fr 50px 1fr;
   }
 
   .section-title{
-    font-size:8px;
-    margin-bottom:3px;
+    font-size:7.4px;
+    margin-bottom:2.5px;
   }
 
   .equip-list{
@@ -479,57 +536,62 @@ body{
   }
 
   .equip-item{
-    font-size:9.7px;
-    padding:4px 6px;
-    grid-template-columns:19px 1fr 120px;
+    background:#EEEDFE !important;
+    font-size:9px;
+    padding:3.5px 5px;
+    grid-template-columns:18px 1fr 112px;
     gap:5px;
   }
 
   .equip-number{
-    width:16px;
-    height:16px;
-    font-size:8.5px;
+    background:#3B35C4 !important;
+    color:#fff !important;
+    width:15px;
+    height:15px;
+    font-size:8px;
   }
 
   .devolvido-box{
-    font-size:8px;
+    font-size:7.5px;
     padding-left:5px;
   }
 
   .devolvido-title{
-    font-size:7px;
-    margin-bottom:2px;
+    font-size:6.8px;
+    margin-bottom:1px;
   }
 
   .devolvido-options{
-    gap:4px;
+    gap:3px;
   }
 
   .check-square{
-    width:14px;
-    height:14px;
+    width:13px;
+    height:13px;
+    border:1.4px solid #3B35C4;
+    background:#fff !important;
   }
 
   .check-label{
-    font-size:7px;
+    font-size:6.7px;
   }
 
   .declaracao,
   .client-message{
-    font-size:9.2px;
+    font-size:8.5px;
   }
 
   .signature{
-    height:31px;
-    font-size:8.3px;
+    height:29px;
+    font-size:8px;
   }
 
   .privacy{
-    font-size:7px;
+    font-size:6.5px;
   }
 
   .footer-note{
-    font-size:7.8px;
+    font-size:7.2px;
   }
 }
 </style>
@@ -738,7 +800,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="value">#<span class="js-os">—</span></div>
         </div>
 
-        <div style="height:5px"></div>
+        <div style="height:4px"></div>
 
         <div class="section-title js-titulo-equipamento">Equipamento retirado</div>
         <div class="equip-list js-equip-list"></div>
@@ -752,7 +814,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
 
-      <div class="section">
+      <div class="section signature-section">
         <div class="section-title">Assinatura do cliente</div>
         <div class="signature-wrap">
           <div class="signature">Assinatura do cliente</div>
@@ -829,7 +891,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="value">#<span class="js-os">—</span></div>
         </div>
 
-        <div style="height:5px"></div>
+        <div style="height:4px"></div>
 
         <div class="section-title js-titulo-equipamento">Equipamento retirado</div>
         <div class="equip-list js-equip-list"></div>
