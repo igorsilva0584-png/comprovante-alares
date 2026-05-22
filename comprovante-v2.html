@@ -727,6 +727,30 @@ function setText(selector, value){
   });
 }
 
+function limparNomeArquivo(texto){
+  return (texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .replace(/_+/g, "_")
+    .substring(0, 70)
+    .toUpperCase();
+}
+
+function definirTituloPDF(os, nome){
+  const osLimpa = limparNomeArquivo(os);
+  const nomeLimpo = limparNomeArquivo(nome);
+
+  if(osLimpa && nomeLimpo){
+    document.title = `Comprovante_OS_${osLimpa}_${nomeLimpo}`;
+  }else if(osLimpa){
+    document.title = `Comprovante_OS_${osLimpa}`;
+  }else{
+    document.title = "Comprovante_Retirada_Alares";
+  }
+}
+
 function getDadosComprovante(){
   const compacto = getHashParam("d");
 
@@ -833,6 +857,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setText(".js-terceirizada", dados.terceirizada);
   setText(".js-data", dataEmissao);
 
+  definirTituloPDF(dados.os, dados.nome);
   renderEquipamentos(dados.serial);
 });
 </script>
