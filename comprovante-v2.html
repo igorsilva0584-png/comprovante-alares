@@ -438,16 +438,14 @@ body{
 
 <script>
 /*
-  Parâmetros esperados na URL:
-  #o=OS
-  &n=Nome
-  &e=Endereco
-  &c=Cidade
-  &s=Serial1|Serial2|Serial3
-  &t=Terceirizada
+  FORMATO COMPACTO RECOMENDADO:
+  #d=OS~Nome~Endereco~Cidade~Serial1|Serial2|Serial3~Terceirizada
 
-  Compatibilidade adicional com parâmetros antigos:
-  os, nm, end, cid, eq
+  FORMATO NOVO TAMBÉM ACEITO:
+  #o=OS&n=Nome&e=Endereco&c=Cidade&s=Serial1|Serial2&t=Terceirizada
+
+  FORMATO ANTIGO TAMBÉM ACEITO:
+  #os=OS&nm=Nome&end=Endereco&cid=Cidade&eq=Serial
 */
 
 function getHashParam(name){
@@ -460,6 +458,32 @@ function setText(selector, value){
   document.querySelectorAll(selector).forEach(el => {
     el.textContent = value;
   });
+}
+
+function getDadosComprovante(){
+  const compacto = getHashParam("d");
+
+  if (compacto){
+    const partes = compacto.split("~");
+
+    return {
+      os: partes[0] || "—",
+      nome: partes[1] || "—",
+      endereco: partes[2] || "—",
+      cidade: partes[3] || "—",
+      serial: partes[4] || "Não informado",
+      terceirizada: partes[5] || "—"
+    };
+  }
+
+  return {
+    os: getHashParam("o") || getHashParam("os") || "—",
+    nome: getHashParam("n") || getHashParam("nm") || "—",
+    endereco: getHashParam("e") || getHashParam("end") || "—",
+    cidade: getHashParam("c") || getHashParam("cid") || "—",
+    serial: getHashParam("s") || getHashParam("eq") || "Não informado",
+    terceirizada: getHashParam("t") || getHashParam("terceirizada") || "—"
+  };
 }
 
 function renderEquipamentos(serialTexto){
@@ -497,22 +521,17 @@ function renderEquipamentos(serialTexto){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const os = getHashParam("o") || getHashParam("os") || "—";
-  const nome = getHashParam("n") || getHashParam("nm") || "—";
-  const endereco = getHashParam("e") || getHashParam("end") || "—";
-  const cidade = getHashParam("c") || getHashParam("cid") || "—";
-  const serial = getHashParam("s") || getHashParam("eq") || "Não informado";
-  const terceirizada = getHashParam("t") || getHashParam("terceirizada") || "—";
+  const dados = getDadosComprovante();
   const dataEmissao = new Date().toLocaleDateString("pt-BR");
 
-  setText(".js-os", os);
-  setText(".js-nome", nome);
-  setText(".js-endereco", endereco);
-  setText(".js-cidade", cidade);
-  setText(".js-terceirizada", terceirizada);
+  setText(".js-os", dados.os);
+  setText(".js-nome", dados.nome);
+  setText(".js-endereco", dados.endereco);
+  setText(".js-cidade", dados.cidade);
+  setText(".js-terceirizada", dados.terceirizada);
   setText(".js-data", dataEmissao);
 
-  renderEquipamentos(serial);
+  renderEquipamentos(dados.serial);
 });
 </script>
 </head>
