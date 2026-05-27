@@ -87,7 +87,7 @@ body{
 .header{
   background:var(--primary) !important;
   color:#fff !important;
-  padding:10px 18px;
+  padding:9px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -96,22 +96,26 @@ body{
 .logo-box{
   display:flex;
   flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
 }
 
-.logo{
-  font-family:Arial Black, Arial, sans-serif;
-  font-size:25px;
-  letter-spacing:4px;
-  font-weight:900;
-  line-height:1;
-  color:#fff !important;
+.brand-logo{
+  width:86px;
+  height:44px;
+  object-fit:contain;
+  display:block;
+  background:#fff;
+  border-radius:8px;
+  padding:3px 7px;
 }
 
 .logo-sub{
-  font-size:9.5px;
-  letter-spacing:1.4px;
+  font-size:9.3px;
+  letter-spacing:1.2px;
   color:#D8D5FF !important;
-  margin-top:4px;
+  margin-top:3px;
+  font-weight:600;
 }
 
 .header-right{
@@ -494,8 +498,9 @@ body{
     padding-bottom:0;
   }
 
-  .logo{
-    font-size:23px;
+  .brand-logo{
+    width:80px;
+    height:40px;
   }
 
   .doc-title{
@@ -552,17 +557,20 @@ body{
   .header{
     background:var(--primary) !important;
     color:#fff !important;
-    padding:7px 12px;
+    padding:6px 12px;
   }
 
-  .logo{
-    font-size:21px;
-    color:#fff !important;
+  .brand-logo{
+    width:72px;
+    height:36px;
+    border-radius:7px;
+    padding:2px 6px;
   }
 
   .logo-sub{
-    font-size:7.8px;
+    font-size:7.4px;
     color:#D8D5FF !important;
+    margin-top:2px;
   }
 
   .header-right-main,
@@ -887,7 +895,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <section class="via">
     <div class="header">
       <div class="logo-box">
-        <div class="logo">ALARES</div>
+        <img src="logo-alares.png" alt="Logo Alares" class="brand-logo">
         <div class="logo-sub">Logística Reversa</div>
       </div>
 
@@ -1004,7 +1012,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <section class="via">
     <div class="header">
       <div class="logo-box">
-        <div class="logo">ALARES</div>
+        <img src="logo-alares.png" alt="Logo Alares" class="brand-logo">
         <div class="logo-sub">Logística Reversa</div>
       </div>
 
