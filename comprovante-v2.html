@@ -100,18 +100,15 @@ body{
   justify-content:center;
 }
 
-
 .brand-logo{
-  width:104px;
-  height:42px;
-  object-fit:cover;
-  object-position:center;
+  width:106px;
+  height:34px;
+  object-fit:contain;
   display:block;
   background:transparent;
   border-radius:0;
   padding:0;
 }
-
 
 .logo-sub{
   font-size:9.3px;
@@ -271,6 +268,11 @@ body{
   word-break:break-word;
 }
 
+.equip-extra{
+  background:#fff !important;
+  border:1px dashed #BDB7FF;
+}
+
 .equip-number{
   background:var(--primary) !important;
   color:#fff !important;
@@ -285,8 +287,19 @@ body{
   flex-shrink:0;
 }
 
+.equip-extra .equip-number{
+  background:#fff !important;
+  color:var(--primary) !important;
+  border:1.4px solid var(--primary);
+}
+
 .equip-text{
   line-height:1.18;
+}
+
+.equip-extra .equip-text{
+  color:#666;
+  font-weight:700;
 }
 
 .devolvido-box{
@@ -502,8 +515,8 @@ body{
   }
 
   .brand-logo{
-    width:80px;
-    height:40px;
+    width:96px;
+    height:31px;
   }
 
   .doc-title{
@@ -563,15 +576,14 @@ body{
     padding:6px 12px;
   }
 
- .brand-logo{
-  width:88px;
-  height:34px;
-  object-fit:cover;
-  object-position:center;
-  background:transparent;
-  border-radius:0;
-  padding:0;
-}
+  .brand-logo{
+    width:78px;
+    height:25px;
+    object-fit:contain;
+    background:transparent;
+    border-radius:0;
+    padding:0;
+  }
 
   .logo-sub{
     font-size:7.4px;
@@ -652,12 +664,23 @@ body{
     gap:5px;
   }
 
+  .equip-extra{
+    background:#fff !important;
+    border:1px dashed #BDB7FF;
+  }
+
   .equip-number{
     background:var(--primary) !important;
     color:#fff !important;
     width:14px;
     height:14px;
     font-size:7.5px;
+  }
+
+  .equip-extra .equip-number{
+    background:#fff !important;
+    color:var(--primary) !important;
+    border:1.2px solid var(--primary);
   }
 
   .devolvido-box{
@@ -781,6 +804,39 @@ function getDadosComprovante(){
   if (compacto){
     const partes = compacto.split("~");
 
+    /*
+      Formato novo sem Carteira:
+      0 OS
+      1 Nome
+      2 Endereco
+      3 Bairro
+      4 Cidade
+      5 Serial
+      6 Terceirizada
+    */
+    if (partes.length === 7){
+      return {
+        os: partes[0] || "—",
+        nome: partes[1] || "—",
+        endereco: partes[2] || "—",
+        bairro: partes[3] || "—",
+        cidade: partes[4] || "—",
+        serial: partes[5] || "Não informado",
+        terceirizada: partes[6] || "—"
+      };
+    }
+
+    /*
+      Compatibilidade com formato anterior com Carteira:
+      0 OS
+      1 Nome
+      2 Endereco
+      3 Bairro
+      4 Cidade
+      5 Carteira
+      6 Serial
+      7 Terceirizada
+    */
     if (partes.length >= 8){
       return {
         os: partes[0] || "—",
@@ -788,19 +844,26 @@ function getDadosComprovante(){
         endereco: partes[2] || "—",
         bairro: partes[3] || "—",
         cidade: partes[4] || "—",
-        carteira: partes[5] || "—",
         serial: partes[6] || "Não informado",
         terceirizada: partes[7] || "—"
       };
     }
 
+    /*
+      Compatibilidade com formato compacto antigo:
+      0 OS
+      1 Nome
+      2 Endereco
+      3 Cidade
+      4 Serial
+      5 Terceirizada
+    */
     return {
       os: partes[0] || "—",
       nome: partes[1] || "—",
       endereco: partes[2] || "—",
       bairro: "—",
       cidade: partes[3] || "—",
-      carteira: "—",
       serial: partes[4] || "Não informado",
       terceirizada: partes[5] || "—"
     };
@@ -812,10 +875,47 @@ function getDadosComprovante(){
     endereco: getHashParam("e") || getHashParam("end") || "—",
     bairro: getHashParam("b") || "—",
     cidade: getHashParam("c") || getHashParam("cid") || "—",
-    carteira: getHashParam("k") || "—",
     serial: getHashParam("s") || getHashParam("eq") || "Não informado",
     terceirizada: getHashParam("t") || getHashParam("terceirizada") || "—"
   };
+}
+
+function criarLinhaEquipamento(textoEquipamento, numeroTexto, isExtra){
+  const item = document.createElement("div");
+  item.className = "equip-item";
+
+  if(isExtra){
+    item.classList.add("equip-extra");
+  }
+
+  const numero = document.createElement("div");
+  numero.className = "equip-number";
+  numero.textContent = numeroTexto;
+
+  const texto = document.createElement("div");
+  texto.className = "equip-text";
+  texto.textContent = textoEquipamento;
+
+  const devolvido = document.createElement("div");
+  devolvido.className = "devolvido-box";
+  devolvido.innerHTML = `
+    <div class="devolvido-options">
+      <div class="check-option">
+        <div class="check-square"></div>
+        <div class="check-label">SIM</div>
+      </div>
+      <div class="check-option">
+        <div class="check-square"></div>
+        <div class="check-label">NÃO</div>
+      </div>
+    </div>
+  `;
+
+  item.appendChild(numero);
+  item.appendChild(texto);
+  item.appendChild(devolvido);
+
+  return item;
 }
 
 function renderEquipamentos(serialTexto){
@@ -830,37 +930,22 @@ function renderEquipamentos(serialTexto){
     container.innerHTML = "";
 
     listaFinal.forEach((equipamento, index) => {
-      const item = document.createElement("div");
-      item.className = "equip-item";
+      const linha = criarLinhaEquipamento(
+        "Serial/equipamento: " + equipamento,
+        index + 1,
+        false
+      );
 
-      const numero = document.createElement("div");
-      numero.className = "equip-number";
-      numero.textContent = index + 1;
-
-      const texto = document.createElement("div");
-      texto.className = "equip-text";
-      texto.textContent = "Serial/equipamento: " + equipamento;
-
-      const devolvido = document.createElement("div");
-      devolvido.className = "devolvido-box";
-      devolvido.innerHTML = `
-        <div class="devolvido-options">
-          <div class="check-option">
-            <div class="check-square"></div>
-            <div class="check-label">SIM</div>
-          </div>
-          <div class="check-option">
-            <div class="check-square"></div>
-            <div class="check-label">NÃO</div>
-          </div>
-        </div>
-      `;
-
-      item.appendChild(numero);
-      item.appendChild(texto);
-      item.appendChild(devolvido);
-      container.appendChild(item);
+      container.appendChild(linha);
     });
+
+    const linhaExtra = criarLinhaEquipamento(
+      "Extra: ________________________________________________",
+      "+",
+      true
+    );
+
+    container.appendChild(linhaExtra);
   });
 
   const qtd = listaFinal.length;
@@ -879,7 +964,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setText(".js-endereco", dados.endereco);
   setText(".js-bairro", dados.bairro);
   setText(".js-cidade", dados.cidade);
-  setText(".js-carteira", dados.carteira);
   setText(".js-terceirizada", dados.terceirizada);
   setText(".js-data", dataEmissao);
 
@@ -901,7 +985,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <section class="via">
     <div class="header">
       <div class="logo-box">
-        <img src="logo-alares.png" alt="Logo Alares" class="brand-logo">
+        <img src="logo-alares.png" alt="Alares" class="brand-logo">
         <div class="logo-sub">Logística Reversa</div>
       </div>
 
@@ -941,9 +1025,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="section">
         <div class="section-title">Dados da retirada</div>
         <div class="grid">
-          <div class="label">Carteira</div>
-          <div class="value js-carteira">—</div>
-
           <div class="label">Terceirizada</div>
           <div class="value js-terceirizada">—</div>
 
@@ -1018,7 +1099,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <section class="via">
     <div class="header">
       <div class="logo-box">
-        <img src="logo-alares.png" alt="Logo Alares" class="brand-logo">
+        <img src="logo-alares.png" alt="Alares" class="brand-logo">
         <div class="logo-sub">Logística Reversa</div>
       </div>
 
@@ -1058,9 +1139,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="section">
         <div class="section-title">Dados da retirada</div>
         <div class="grid">
-          <div class="label">Carteira</div>
-          <div class="value js-carteira">—</div>
-
           <div class="label">Terceirizada</div>
           <div class="value js-terceirizada">—</div>
 
@@ -1093,13 +1171,4 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="privacy">
         Aviso de privacidade: esta página não coleta dados de visitantes.
         Os dados exibidos são preenchidos a partir do link gerado na agenda.
-        O provedor de hospedagem pode registrar informações técnicas, como endereço IP, por motivos de segurança.
-      </div>
-
-    </div>
-  </section>
-
-</main>
-
-</body>
-</html>
+        O provedor de hospedagem pode registrar informações técnicas, como endereço
